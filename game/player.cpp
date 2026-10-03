@@ -1,6 +1,6 @@
 #include "player.hpp"
 
-constexpr float PLAYER_SPEED = 4.0f;
+constexpr float PLAYER_SPEED = 1.5f;
 
 void update_player(Player& player)
 {
@@ -23,7 +23,7 @@ void update_player(Player& player)
     }
 }
 
-void draw_player(SDL_Renderer* renderer, const Player& player)
+void draw_player(SDL_Renderer* renderer, const Player& player, float camera_x, float camera_y)
 {
     const SDL_FRect& rectangle = player.rectangle;
 
@@ -31,8 +31,8 @@ void draw_player(SDL_Renderer* renderer, const Player& player)
     SDL_SetRenderDrawColor(renderer, 150, 105, 55, 255);
 
     SDL_FRect shadow{
-        rectangle.x - 6.0f,
-        rectangle.y + rectangle.h - 4.0f,
+        rectangle.x - 6.0f - camera_x,
+        rectangle.y + rectangle.h - 4.0f - camera_y,
         rectangle.w + 12.0f,
         8.0f
     };
