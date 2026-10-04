@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL3/SDL.h>
+#include "world.hpp"
 
 struct Player {
     SDL_FRect rectangle{
@@ -11,5 +12,5 @@ struct Player {
     };
 };
 
-void update_player(Player& player);
+void update_player(Player& player, const World& world);
 void draw_player(SDL_Renderer* renderer, const Player& player, float camera_x, float camera_y);

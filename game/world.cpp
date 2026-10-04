@@ -66,3 +66,24 @@ void World::draw(
         );
     }
 }
+
+bool World::collides(
+    const SDL_FRect& rectangle
+) const {
+    for (const CactusPosition& cactus : cacti) {
+        SDL_FRect cactus_box{
+            cactus.x - 5.0f * cactus.scale,
+            cactus.y - 64.0f * cactus.scale,
+            10.0f * cactus.scale,
+            64.0f * cactus.scale
+        };
+
+        if (SDL_HasRectIntersectionFloat(
+                &rectangle,
+                &cactus_box)) {
+            return true;
+        }
+    }
+
+    return false;
+}
