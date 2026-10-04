@@ -12,4 +12,4 @@ struct Player {
 };
 
 void update_player(Player& player);
-void draw_player(SDL_Renderer* renderer, const Player& player);
+void draw_player(SDL_Renderer* renderer, const Player& player, float camera_x, float camera_y);
