@@ -11,8 +11,8 @@ struct CactusPosition {
 
 class World {
 public:
-    void update(float player_x, float player_y);
-    void draw(SDL_Renderer* renderer, float camera_x, float camera_y);
+    void update(const SDL_FPoint& player_position);
+    void draw(SDL_Renderer* renderer, const SDL_FPoint& camera);
     bool collides(const SDL_FRect& rectangle) const;
 
 private:
