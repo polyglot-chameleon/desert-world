@@ -1,4 +1,5 @@
 #include "player.hpp"
+#include <SDL3/SDL_rect.h>
 
 constexpr float PLAYER_SPEED = 2;
 
@@ -46,7 +47,7 @@ void update_player(
 }
 
 
-void draw_player(SDL_Renderer* renderer, const Player& player, float camera_x, float camera_y)
+void draw_player(SDL_Renderer* renderer, const Player& player, const SDL_FPoint& camera)
 {
     const SDL_FRect& rectangle = player.rectangle;
 
@@ -54,8 +55,8 @@ void draw_player(SDL_Renderer* renderer, const Player& player, float camera_x, f
     SDL_SetRenderDrawColor(renderer, 55, 65, 75, 255);
 
     SDL_FRect body{
-        rectangle.x + 6 - camera_x,
-        rectangle.y + 14 - camera_y,
+        rectangle.x + 6 - camera.x,
+        rectangle.y + 14 - camera.y,
         rectangle.w - 12.0f,
         rectangle.h - 14.0f
     };
@@ -66,8 +67,8 @@ void draw_player(SDL_Renderer* renderer, const Player& player, float camera_x, f
     SDL_SetRenderDrawColor(renderer, 205, 145, 95, 255);
 
     SDL_FRect head{
-        rectangle.x + 10 - camera_x,
-        rectangle.y - camera_y,
+        rectangle.x + 10 - camera.x,
+        rectangle.y - camera.y,
         rectangle.w - 20.0f,
         18.0f
     };
