@@ -2,26 +2,49 @@
 
 constexpr float PLAYER_SPEED = 2;
 
-void update_player(Player& player)
-{
-    const bool* keyboard = SDL_GetKeyboardState(nullptr);
+void update_player(
+    Player& player,
+    const World& world
+) {
+    // 1. Read keyboard.
+    float move_x = 0.0f;
+    float move_y = 0.0f;
+
+    const bool* keyboard =
+        SDL_GetKeyboardState(nullptr);
 
     if (keyboard[SDL_SCANCODE_LEFT]) {
-        player.rectangle.x -= PLAYER_SPEED;
+        move_x -= PLAYER_SPEED;
     }
 
     if (keyboard[SDL_SCANCODE_RIGHT]) {
-        player.rectangle.x += PLAYER_SPEED;
+        move_x += PLAYER_SPEED;
     }
 
     if (keyboard[SDL_SCANCODE_UP]) {
-        player.rectangle.y -= PLAYER_SPEED;
+        move_y -= PLAYER_SPEED;
     }
 
     if (keyboard[SDL_SCANCODE_DOWN]) {
-        player.rectangle.y += PLAYER_SPEED;
+        move_y += PLAYER_SPEED;
+    }
+
+    // 2. Test and apply movement.
+    SDL_FRect test = player.rectangle;
+    test.x += move_x;
+
+    if (!world.collides(test)) {
+        player.rectangle.x += move_x;
+    }
+
+    test = player.rectangle;
+    test.y += move_y;
+
+    if (!world.collides(test)) {
+        player.rectangle.y += move_y;
     }
 }
+
 
 void draw_player(SDL_Renderer* renderer, const Player& player, float camera_x, float camera_y)
 {
