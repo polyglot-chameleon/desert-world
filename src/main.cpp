@@ -24,7 +24,7 @@ int main() {
       }
     }
 
-    update_player(player);
+    update_player(player, world);
 
     world.update(player.rectangle.x, player.rectangle.y);
 

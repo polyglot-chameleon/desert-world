@@ -13,6 +13,7 @@ class World {
 public:
     void update(float player_x, float player_y);
     void draw(SDL_Renderer* renderer, float camera_x, float camera_y);
+    bool collides(const SDL_FRect& rectangle) const;
 
 private:
     std::vector<CactusPosition> cacti;
