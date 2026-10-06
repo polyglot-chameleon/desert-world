@@ -33,3 +33,28 @@ target_link_libraries(desert
     PRIVATE
         SDL3::SDL3
 )
+
+include(CTest)
+
+if(BUILD_TESTING)
+    find_package(Catch2 3 REQUIRED)
+
+    add_executable(world_tests
+        test/world_test.cpp
+        game/world.cpp
+        game/cactus.cpp
+    )
+
+    target_include_directories(world_tests
+        PRIVATE
+            game
+    )
+
+    target_link_libraries(world_tests
+        PRIVATE
+            SDL3::SDL3
+            Catch2::Catch2WithMain
+    )
+
+    add_test(NAME world_tests COMMAND world_tests)
+endif()
