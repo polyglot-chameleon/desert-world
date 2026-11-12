@@ -41,10 +41,12 @@ if(BUILD_TESTING)
 
     add_executable(game_tests
         test/world_test.cpp
+	test/player_test.cpp
         test/cactus_test.cpp
 
         game/world.cpp
-        game/cactus.cpp
+	game/player.cpp
+	game/cactus.cpp
     )
 
     target_include_directories(game_tests
