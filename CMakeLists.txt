@@ -39,22 +39,25 @@ include(CTest)
 if(BUILD_TESTING)
     find_package(Catch2 3 REQUIRED)
 
-    add_executable(world_tests
+    add_executable(game_tests
         test/world_test.cpp
+        test/cactus_test.cpp
+
         game/world.cpp
         game/cactus.cpp
     )
 
-    target_include_directories(world_tests
+    target_include_directories(game_tests
         PRIVATE
             game
     )
 
-    target_link_libraries(world_tests
+    target_link_libraries(game_tests
         PRIVATE
             SDL3::SDL3
             Catch2::Catch2WithMain
     )
 
-    add_test(NAME world_tests COMMAND world_tests)
+    include(Catch)
+    catch_discover_tests(game_tests)
 endif()
